@@ -1,0 +1,1 @@
+select 'spm_test6.sql' from dual;

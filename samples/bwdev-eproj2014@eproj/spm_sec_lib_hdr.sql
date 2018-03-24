@@ -1,0 +1,1 @@
+select 'spm_sec_lib_hdr' from dual;

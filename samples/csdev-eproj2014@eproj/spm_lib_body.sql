@@ -1,0 +1,1 @@
+select 'spm_lib_body' from dual;
