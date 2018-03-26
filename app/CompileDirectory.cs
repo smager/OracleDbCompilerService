@@ -7,47 +7,35 @@ using System.Threading;
 
 namespace OracleDbCompilerService
 {
+
     public class CompileDirectory
     {
-        public List<string> headerFiles = new List<string>();
-        public List<string> bodyFiles = new List<string>();
-        public List<string> dbFiles = new List<string>();
-        int counterHF = 0
-        , counterBF = 0
-        , counterF = 0;
-        public CompileDirectory(List<string> headerFiles, List<string> bodyFiles, List<string> dbFiles) {
-            this.headerFiles = headerFiles;
-            this.bodyFiles = bodyFiles;
-            this.dbFiles = dbFiles;
-            compileHeaderfiles();
+        private FolderComplete onFolderComplete { get; set; }
+        private string dbFileGroup { get; set; }
+        private List<string> files { get; set; }
+        private string[] allFiles { get; set; }
+        private string directory { get; set; }
+
+        int counter = 0;
+        public CompileDirectory(string directory, string dbFileGroup, string[] allFiles, List<string> files, FolderComplete onFolderComplete) {
+            this.dbFileGroup = dbFileGroup;
+            this.allFiles = allFiles;
+            this.files = files;
+            this.directory = directory;
+            this.onFolderComplete = onFolderComplete;
+            compileFiles();
+
         }
         
-        private void compileHeaderfiles() {
-            foreach (var f in headerFiles)
-            {
-                ThreadStart threadStart = new ThreadStart(new CompileDirectoryFile(getLogonName(f), f, onHeaderFileDone).Execute);
-                Thread t = new Thread(threadStart);
-                t.Start();
-            }
-        }
-        private void compileBodyfiles()
-        {
-            foreach (var f in bodyFiles)
-            {
-                ThreadStart threadStart = new ThreadStart(new CompileDirectoryFile(getLogonName(f), f, onBodyFileDone).Execute);
-                Thread t = new Thread(threadStart);
-                t.Start();
-            }
-        }
-        private void compileDbfiles()
-        {
-            foreach (var f in dbFiles)
+        private void compileFiles() {
+            foreach (var f in files)
             {
                 ThreadStart threadStart = new ThreadStart(new CompileDirectoryFile(getLogonName(f), f, onFileDone).Execute);
                 Thread t = new Thread(threadStart);
                 t.Start();
             }
         }
+     
         private string getLogonName(string path) {
             char _slash = '\\';
             string[] _arr = path.Split(_slash)[path.Split(_slash).Count() - 2].Split('-');
@@ -62,40 +50,20 @@ namespace OracleDbCompilerService
 
         }
  
-        private void onHeaderFileDone(string responseText,string sourceFileName)
+        private void onFileDone(string responseText,string sourceFileName)
         {
 
             saveResult(sourceFileName, responseText);
 
-            counterHF++;
-            if(counterHF == headerFiles.Count)
+            counter++;
+            if(counter == this.files.Count)
             {
                 Console.WriteLine("header files completed.");
+                this.onFolderComplete(this.directory,this.allFiles, this.dbFileGroup);
             }
         }
 
-        private void onBodyFileDone(string responseText, string sourceFileName)
-        {
 
-            counterBF++;
-            if (counterBF == bodyFiles.Count)
-            {
-                Console.WriteLine("body files completed.");
-            }
- 
-        }
-
-        private void onFileDone(string responseText, string sourceFileName)
-        {
-
-            
-            counterF++;
-            if (counterF == dbFiles.Count)
-            {
-                Console.WriteLine("db Files completed.");
-            }
-           
-        }
 
     }
 }

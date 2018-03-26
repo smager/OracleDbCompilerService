@@ -10,16 +10,15 @@ namespace OracleDbCompilerService
     {
         string subFolder = "result";
         string logFile { get; set; }
-        private System.Timers.Timer timer = new System.Timers.Timer();
+        private System.Timers.Timer timer  { get;set; }
         public monitorSQLData() {
             if (!Directory.Exists(this.subFolder)) Directory.CreateDirectory(this.subFolder);
             this.logFile = this.subFolder + @"\log.txt";
             if (File.Exists(this.logFile)) File.Delete(this.logFile);
 
-            timer.Interval = AppConfig.TimerInterval;
+            timer = new System.Timers.Timer(AppConfig.TimerInterval);
             timer.Elapsed += OnTimerElapsed;
-            timer.AutoReset = false;
-            timer.Start();
+            timer.Enabled = true;
         }
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
