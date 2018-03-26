@@ -17,12 +17,12 @@ namespace OracleDbCompilerService
         public frmMain()
         {
             InitializeComponent();
-            //new monitorSQLData();
+            new monitorSQLData();
             new monitorDirectory();
         }
         private void label1_DoubleClick(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Do you want to stop the service?", "Nexgen Compiler Service",
+            if (MessageBox.Show("Do you want to stop the service?", "Oracle Db Compiler Service",
                 MessageBoxButtons.YesNo, MessageBoxIcon.Question,
                 MessageBoxDefaultButton.Button1) == DialogResult.Yes)
             {

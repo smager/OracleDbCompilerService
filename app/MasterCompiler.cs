@@ -18,7 +18,7 @@ namespace OracleDbCompilerService
             p.StartInfo.CreateNoWindow = true;
 
             p.StartInfo.FileName = "compile.bat";
-            p.StartInfo.Arguments = string.Format("{0} {1} ", this.logonName,this.sourceFileName);
+            p.StartInfo.Arguments = string.Format("{0} \"{1}\"", this.logonName,this.sourceFileName);
 
             p.EnableRaisingEvents = true;
             p.OutputDataReceived += new System.Diagnostics.DataReceivedEventHandler(Compile_OutputDataReceived);

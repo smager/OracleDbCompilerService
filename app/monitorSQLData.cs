@@ -22,6 +22,7 @@ namespace OracleDbCompilerService
         }
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
+            Console.WriteLine("monitorSQLData: " + DateTime.Now.ToString("h:mm:ss tt") );
             this.timer.Stop();
             checkDataFromServer();
         }

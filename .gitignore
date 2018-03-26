@@ -1,5 +1,6 @@
 
 app/bin/*
 app/obj/*
+app/publish/*
 *.suo
 *.ide

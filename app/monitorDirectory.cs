@@ -29,7 +29,7 @@ namespace OracleDbCompilerService
         private void OnTimerElapsed(object sender, System.Timers.ElapsedEventArgs e)
         {
 
-           Console.WriteLine("monitorDirectory interval:" + AppConfig.TimerInterval);
+           Console.WriteLine("monitorDirectory: " + DateTime.Now.ToString("h:mm:ss tt"));
            checkFiles();
         }
  

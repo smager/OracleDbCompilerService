@@ -41,7 +41,7 @@
             this.label1.Text = "Listening...";
             this.label1.DoubleClick += new System.EventHandler(this.label1_DoubleClick);
             // 
-            // Form1
+            // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -49,11 +49,11 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "frmMain";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Nexgen Oracle Compiler Service";
+            this.Text = "Oracle Compiler Service";
             this.ResumeLayout(false);
             this.PerformLayout();
 
