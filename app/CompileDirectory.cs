@@ -45,9 +45,7 @@ namespace OracleDbCompilerService
 
             var resultFolder = Path.GetDirectoryName(path) + @"\result\";
             if (!Directory.Exists(resultFolder)) Directory.CreateDirectory(resultFolder);
-
             File.WriteAllText(resultFolder + Path.GetFileName(path) + ".txt", responseText);
-
         }
  
         private void onFileDone(string responseText,string sourceFileName)
